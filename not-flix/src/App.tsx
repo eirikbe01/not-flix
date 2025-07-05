@@ -1,11 +1,17 @@
 import './App.css';
-import { fetchMovieDetailsByTitle } from './api/fetchTMBD';
+import { useEffect } from 'react';
+import { fetchFilmOMDbByTitle, fetchFilmTMDbByTitle } from './api/fetchFilms';
 function App() {
 
-  return (
-    <div>{fetchMovieDetailsByTitle("Harry Potter")}</div>
-  );
 
+  useEffect(() => {
+    fetchFilmTMDbByTitle("Harry Potter");
+    fetchFilmOMDbByTitle("Harry Potter");
+  }, []);
+
+  return(
+    <div>Hello World !!! </div>
+  );
 }
 
 export default App
