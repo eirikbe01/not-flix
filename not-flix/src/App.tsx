@@ -1,10 +1,11 @@
-import './App.css'
-
+import './App.css';
+import { fetchMovieDetailsByTitle } from './api/fetchTMBD';
 function App() {
 
   return (
-    <div>Hello World</div>
+    <div>{fetchMovieDetailsByTitle("Harry Potter")}</div>
   );
+
 }
 
 export default App
