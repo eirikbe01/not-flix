@@ -30,7 +30,7 @@ interface FilmOMDb {
     Error?: string;
 }
 
-interface FilmTMDb {
+export interface FilmTMDb {
     id: number;
     title: string;
     overview: string;

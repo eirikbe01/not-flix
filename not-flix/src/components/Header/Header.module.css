@@ -1,6 +1,60 @@
 
 
 .mainContainer{
-
+    display: flex;
+    align-items: center;
+    height: 80px;
     width: 100%;
+    background-color: hsl(0, 48%, 56%);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(255, 168, 168, 0.9);
+}
+
+.mainContainer,
+.headerLeft,
+.headerCenter,
+.headerRight {
+    flex: 1;
+}
+
+.headerLeft {
+    text-align: left;
+}
+
+
+.headerCenter {
+    text-align: center;
+}
+
+.headerRight {
+    text-align: right;
+}
+
+.searchContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.titleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.title {
+    font-size: 2rem;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+}
+
+
+.menuBtn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin: 16px;
 }

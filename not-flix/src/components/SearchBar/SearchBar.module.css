@@ -3,33 +3,34 @@
 
 .mainContainer {
     display: flex;
-    border: 1px solid white;
-    border-color: red;
+    align-items: center;
+    justify-content: center;
 }
-
 
 .searchContainer {
     display: flex;
     margin: 10px;
-    border: 1px solid white;
+    width: 100%;
 }
 
 .inputField {
-    margin: 8px;
     background-color: white;
     border-radius: 10px;
     color: black;
-    padding: 4px;
+    padding: 0.3rem;
     outline: none;
+    width: 200px;
+    font-size: 1.2rem;
 }
-
 
 .searchBtn {
-    padding-left: 8px;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: 25%;
+    font-size: 1.2rem;
 }
 
-.icon:hover {
+.searchBtn:hover {
     cursor: pointer;
+    
 }

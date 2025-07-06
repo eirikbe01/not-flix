@@ -1,8 +1,10 @@
 
-
+import { MovieCard } from '../components/MovieCard/MovieCard';
 
 export const Home = () => {
     return(
-        <div>Home</div>
+        <div>
+            <MovieCard />
+        </div>
     );
 }
