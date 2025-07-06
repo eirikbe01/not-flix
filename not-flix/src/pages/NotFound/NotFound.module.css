@@ -1,0 +1,36 @@
+
+
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+    background-color: hsl(0, 0%, 16%);
+    margin: 0 auto;
+    padding: 10px;
+    border-bottom: 1px solid white;
+    margin-bottom: 24px;
+    width: 500px;
+}
+
+.goBackBtn {
+    border: 1px solid white;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: hsl(0, 0%, 16%);
+    padding: 10px;
+}
+
+
+.goBackBtn:hover {
+    cursor: pointer;
+    background-color: hsl(0, 0%, 26%);
+}

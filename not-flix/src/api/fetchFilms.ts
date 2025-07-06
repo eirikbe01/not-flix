@@ -87,4 +87,26 @@ export const fetchFilmOMDbByTitle = async (movieTitle: string, year?: string) : 
     return;
 }
 
+// TMDb
+export const fetchPopularMovies = async (): Promise<FilmTMDb[] | undefined> => {
+    // Get three pages worth of content
+    for (let i = 1; i <= 3; i++) {
+        var url = `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${i}`;
+        try {
+            const response = await fetch(url);
+
+            if (!response.ok) {
+                throw new Error(`TMDB request failed: ${response.status}`);
+            }
+            const data = await response.json() as TmdbResponse;
+
+            console.log("Result TMDb ", data.results);
+            return data.results.length ? data.results : undefined;
+
+        } catch(error) {
+            console.error(error);
+        }
+    }
+}
+
 

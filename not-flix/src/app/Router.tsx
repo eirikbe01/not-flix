@@ -4,7 +4,7 @@ import { HomeLayout } from '../pages/HomeLayout';
 import { Home } from '../pages/Home';
 import { MoviePage } from '../pages/MoviePage';
 import { GenrePage } from '../pages/GenrePage';
-import { NotFound } from '../pages/NotFound';
+import { NotFound } from '../pages/NotFound/NotFound';
 
 
 export const Router = () => {
