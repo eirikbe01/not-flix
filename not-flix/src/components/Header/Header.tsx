@@ -6,7 +6,7 @@ export const Header = () => {
     return(
         <header className={styles.mainContainer}>
             <div className={styles.headerLeft}>
-                <SearchBar />
+                <p className={styles.userInfo}>User Info</p>
             </div>
 
             <div className={styles.headerCenter}
@@ -15,8 +15,11 @@ export const Header = () => {
             </div>
 
             <div className={styles.headerRight}>
-                <button className={styles.menuBtn}>
-                    ☰
+                <button>
+                    Favorites
+                </button>
+                <button>
+                    About
                 </button>
             </div>
         </header>

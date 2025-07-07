@@ -1,13 +1,8 @@
-import { useState, useEffect } from 'react';
-import { FilmTMDb } from '../../api/fetchFilms';
-import { fetchFilmTMDbByTitle } from '../../api/fetchFilms';
-import { title } from 'process';
+import styles from './MovieCard.module.css';
 
-export const MovieCard = (titleSearch: string) => {
-
-    const [film, setFilm] = useState<FilmTMDb | undefined>(undefined);
+export const MovieCard = () => {
 
     return(
-        <div>movie :D</div>
+        <div className={styles.movieCard}>movie :D</div>
     );
 }

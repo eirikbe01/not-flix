@@ -1,20 +1,21 @@
 import { useState } from 'react';
 import styles from './SearchBar.module.css';
-import searchIcon from '../../assets/search.svg';
 
 
 export const SearchBar = () => {
     const [search, setSearch] = useState("");
 
     return(
-        <div className={styles.searchContainer}>
-            <button className={styles.searchBtn}>🔎</button>
-            <input
-                className={styles.inputField}
-                type="text"
-                placeholder="Search..."
-            >
-            </input>
+        <div className={styles.mainContainer}>
+            <div className={styles.searchContainer}>
+                <input
+                    className={styles.inputField}
+                    type="text"
+                    placeholder="Search for movies..."
+                >
+                </input>
+                <button className={styles.searchBtn}>Search</button>
+            </div>
         </div>
     );
 }

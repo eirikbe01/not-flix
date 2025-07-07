@@ -39,7 +39,7 @@ export interface FilmTMDb {
     genre_ids: number[];
 }
 
-interface TmdbResponse {
+export interface TmdbResponse {
     results: FilmTMDb[];
 }
 
