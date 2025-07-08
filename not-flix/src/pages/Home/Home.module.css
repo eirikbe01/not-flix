@@ -1,0 +1,14 @@
+
+
+
+.mainContainer {
+    margin: 24px;
+}
+
+
+
+.moviesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}

@@ -1,8 +1,22 @@
 import styles from './MovieCard.module.css';
 
-export const MovieCard = () => {
+
+
+interface MovieCardProps {
+    title: string;
+    releaseDate: string;
+    posterPath: string;
+}
+export const MovieCard = ({ title, releaseDate, posterPath} : MovieCardProps) => {
 
     return(
-        <div className={styles.movieCard}>movie :D</div>
+        <div className={styles.movieCard}>
+            <div className={styles.poster}>
+                {posterPath}
+            </div>
+            <div className={styles.movieInfo}>
+                {title}, {releaseDate}
+            </div>
+        </div>
     );
 }

@@ -54,10 +54,9 @@ export const fetchFilmTMDbByTitle = async (movieTitle: string) : Promise<FilmTMD
         }
         const data = await response.json() as TmdbResponse;
 
-        console.log("Result TMDb ", data.results);
         return data.results.length ? data.results : undefined;
-    } catch (error) {
-        console.error(error);
+    } catch (err) {
+        console.error(err);
     }
 }
 
@@ -88,10 +87,11 @@ export const fetchFilmOMDbByTitle = async (movieTitle: string, year?: string) : 
 }
 
 // TMDb
-export const fetchPopularMovies = async (): Promise<FilmTMDb[] | undefined> => {
+export const fetchPopularFilms = async (): Promise<FilmTMDb[]> => {
     // Get three pages worth of content
-    for (let i = 1; i <= 3; i++) {
-        var url = `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${i}`;
+    const allPopularFilms: FilmTMDb[] = [];
+    for (let page = 1; page <= 3; page++) {
+        const url = `https://api.themoviedb.org/3/movie/popular?api_key=${TMDbKey}&language=en-US&page=${page}`;
         try {
             const response = await fetch(url);
 
@@ -99,14 +99,13 @@ export const fetchPopularMovies = async (): Promise<FilmTMDb[] | undefined> => {
                 throw new Error(`TMDB request failed: ${response.status}`);
             }
             const data = await response.json() as TmdbResponse;
-
-            console.log("Result TMDb ", data.results);
-            return data.results.length ? data.results : undefined;
+            if(data.results.length) allPopularFilms.push(...data.results);
 
         } catch(error) {
             console.error(error);
         }
     }
+    return allPopularFilms;
 }
 
 
