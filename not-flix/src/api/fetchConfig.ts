@@ -15,7 +15,7 @@ interface ConfigResponse {
     change_keys: string[]
 }
 
-export const fetchImageInfo = async (): Promise<ImagesConfig | undefined > => {
+export const fetchImageConfig = async (): Promise<ImagesConfig | undefined > => {
     const url = `https://api.themoviedb.org/3/configuration?api_key=${TMDbKey}`;
 
     try {

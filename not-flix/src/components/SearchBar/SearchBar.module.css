@@ -1,6 +1,4 @@
 
-
-
 .mainContainer {
     display: flex;
     align-items: center;
@@ -38,11 +36,10 @@
     box-shadow: 2px 2px 4px hsl(0, 0%, 31%);
     margin: 12px;
     width: 120px;
+    transition: background-color 0.3s ease-in-out;
 }
 
 .searchBtn:hover {
     cursor: pointer;
     background-color: hsl(0, 48%, 56%);
-    transition: background-color 0.3s ease, transform 0.2s ease;
-
 }

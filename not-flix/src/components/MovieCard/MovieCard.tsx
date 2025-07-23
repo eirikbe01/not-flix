@@ -12,7 +12,7 @@ export const MovieCard = ({ title, releaseDate, posterPath} : MovieCardProps) =>
     return(
         <div className={styles.movieCard}>
             <div className={styles.poster}>
-                {posterPath}
+                <img src={posterPath} alt={`${title} poster`}></img>
             </div>
             <div className={styles.movieInfo}>
                 {title}, {releaseDate}
