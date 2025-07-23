@@ -1,27 +1,17 @@
 
-import { SearchBar } from '../SearchBar/SearchBar.tsx';
 import styles from './Header.module.css';
+import { useNavigate } from 'react-router-dom';
 
 export const Header = () => {
+
+    const navigate = useNavigate();
+
     return(
-        <header className={styles.mainContainer}>
-            <div className={styles.headerLeft}>
-                <p className={styles.userInfo}>User Info</p>
-            </div>
-
-            <div className={styles.headerCenter}
-            >
-                <h1 className={styles.title}>NotFlix</h1>
-            </div>
-
-            <div className={styles.headerRight}>
-                <button>
-                    Favorites
-                </button>
-                <button>
-                    About
-                </button>
-            </div>
-        </header>
+        <div className={styles.headerContainer}>
+            <h1 onClick={() => navigate("/")}className={styles.title}>NotFlix</h1>
+            <button>
+                Favorites
+            </button>
+        </div>
     );
 }
