@@ -1,9 +1,22 @@
-import { useState } from 'react';
+import { useState, type ChangeEvent } from 'react';
 import styles from './SearchBar.module.css';
 
+interface SearchBarProps {
+    value: string;
+    onSearch: (searchTerm: string) => void;
+}
 
-export const SearchBar = () => {
-    const [search, setSearch] = useState("");
+export const SearchBar = (props: SearchBarProps) => {
+
+    const [inputValue, setInputValue] = useState("");
+
+    const handleOnKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            props.onSearch(inputValue);
+            setInputValue("");
+        }
+    }
 
     return(
         <div className={styles.mainContainer}>
@@ -11,10 +24,22 @@ export const SearchBar = () => {
                 <input
                     className={styles.inputField}
                     type="text"
+                    value={inputValue}
                     placeholder="Search for movies..."
+                    onChange={(event: ChangeEvent<HTMLInputElement>) => setInputValue(event.target.value)}
+                    onKeyDown={(event) => handleOnKeyDown(event)}
                 >
                 </input>
-                <button className={styles.searchBtn}>Search</button>
+                <button
+                    className={styles.searchBtn}
+                    type="button"
+                    onClick={() => {
+                        props.onSearch(inputValue);
+                        setInputValue("");
+                    }}
+                >
+                    Search
+                </button>
             </div>
         </div>
     );

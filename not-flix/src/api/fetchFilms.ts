@@ -43,7 +43,7 @@ export interface TmdbResponse {
     results: FilmTMDb[];
 }
 
-export const fetchFilmTMDbByTitle = async (movieTitle: string) : Promise<FilmTMDb[] | undefined> => {
+export const fetchFilmTMDbByTitle = async (movieTitle: string) : Promise<FilmTMDb[]> => {
     const title = encodeURIComponent(movieTitle);
     const url = `https://api.themoviedb.org/3/search/movie?api_key=${TMDbKey}&query=${title}`;
 
@@ -54,10 +54,11 @@ export const fetchFilmTMDbByTitle = async (movieTitle: string) : Promise<FilmTMD
         }
         const data = await response.json() as TmdbResponse;
 
-        return data.results.length ? data.results : undefined;
+        return data.results.length ? data.results : [];
     } catch (err) {
         console.error(err);
     }
+    return data.results.length ? data.results : [];
 }
 
 export const fetchFilmOMDbByTitle = async (movieTitle: string, year?: string) : Promise<FilmOMDb | undefined> => {

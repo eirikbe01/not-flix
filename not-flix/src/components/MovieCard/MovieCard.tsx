@@ -6,7 +6,6 @@ interface MovieCardProps {
     title: string;
     releaseDate: string;
     posterPath: string;
-    genres: number[];
 }
 export const MovieCard = ({ title, releaseDate, posterPath } : MovieCardProps) => {
 
