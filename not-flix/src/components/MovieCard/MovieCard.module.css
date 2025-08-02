@@ -1,5 +1,6 @@
 
 .movieCard {
+    width: 342px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -8,6 +9,11 @@
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.movieCard:hover {
+    transform: scale(1.02);
 }
 
 .movieInfo {
@@ -33,6 +39,6 @@
     width: 100%;
     height: auto;
     object-fit: cover;
-    border-radius: 12px 12px 0 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 12px 12px 0 0;
 }
