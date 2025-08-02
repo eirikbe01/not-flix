@@ -6,15 +6,16 @@ interface MovieCardProps {
     title: string;
     releaseDate: string;
     posterPath: string;
+    genres: number[];
 }
-export const MovieCard = ({ title, releaseDate, posterPath} : MovieCardProps) => {
+export const MovieCard = ({ title, releaseDate, posterPath } : MovieCardProps) => {
 
     return(
         <div className={styles.movieCard}>
-            <img src={posterPath} alt={`${title} poster`}></img>
+            <img className={styles.poster} src={posterPath} alt={`${title} poster`}></img>
             <div className={styles.movieInfo}>
-                <p>{title}</p>
-                <p>{releaseDate}</p>
+                <h2 className={styles.title}>{title}</h2>
+                <p className={styles.releaseDate}>{releaseDate}</p>
             </div>
         </div>
     );

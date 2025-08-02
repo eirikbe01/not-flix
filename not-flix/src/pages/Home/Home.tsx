@@ -14,16 +14,10 @@ export const Home = () => {
     const posterPaths = popularMovies?.map((movie: FilmTMDb) => movie.poster_path).filter((path): path is string => path !== null && path !== undefined);
     const { config, configLoading, configError } = useConfig();
 
-
-    if (!config) return;
-    if(!posterPaths) return;
-
-
-
     const { poster, posterLoading, posterError } = usePosters(
-        config.secure_base_url, 
-        config.poster_sizes[2], 
-        posterPaths
+        config?.secure_base_url ?? "", 
+        config?.poster_sizes?.[3] ?? "", 
+        posterPaths ?? []
     );
 
     const loading = configLoading || isLoading || posterLoading;
@@ -38,11 +32,16 @@ export const Home = () => {
             <div className={styles.mainContainer}>
                 <div className={styles.moviesContainer}>
                     {popularMovies?.map((movie, index) => {
-                        return(<MovieCard
-                            title={movie.title}
-                            releaseDate={movie.release_date}
-                            posterPath={poster[index]}
-                        />)
+                        return(
+                            <div key={index}>
+                                <MovieCard
+                                    title={movie.title}
+                                    releaseDate={movie.release_date}
+                                    posterPath={posterLoading ? "Loading..." : poster[index] ?? ""}
+                                    genres={movie.genre_ids}
+                                />
+                            </div>
+                        );
                     })}
                 </div>
             </div>

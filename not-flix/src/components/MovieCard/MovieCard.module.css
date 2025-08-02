@@ -2,13 +2,37 @@
 .movieCard {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
-    border: 1px solid white;
+    background-color: hsl(0, 0%, 20%);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.movieInfo{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+.movieInfo {
+    padding: 12px;
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    width: 100%;
+}
+
+
+.title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-family: "Oswald", sans-serif;
+}
+
+
+.poster {
+    max-height: 513px;
+    max-width: 342px;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
