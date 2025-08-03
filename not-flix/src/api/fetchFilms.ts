@@ -58,7 +58,7 @@ export const fetchFilmTMDbByTitle = async (movieTitle: string) : Promise<FilmTMD
     } catch (err) {
         console.error(err);
     }
-    return data.results.length ? data.results : [];
+    return [];
 }
 
 export const fetchFilmOMDbByTitle = async (movieTitle: string, year?: string) : Promise<FilmOMDb | undefined> => {

@@ -4,7 +4,6 @@ import styles from './Home.module.css';
 
 import { useMovieData } from '../../hooks/useMovieData';
 import { useConfig } from '../../hooks/useConfig';
-import { usePosters } from '../../hooks/usePosters';
 import type { FilmTMDb } from '../../api/fetchFilms';
 import { useState, useEffect } from 'react';
 import { useMovieDataTitle } from '../../hooks/useMovieDataTitle';
@@ -14,17 +13,13 @@ export const Home = () => {
     // States
     const [searchTerm, setSearchTerm] = useState("");
     const [movieList, setMovieList] = useState<FilmTMDb[]>([]);
-    const [posterPaths, setPosterPaths] = useState<string[]>([]);
 
     // Hooks
     const { popularMovies, isLoading, isError } = useMovieData();
     const { movies, moviesLoading, moviesError } = useMovieDataTitle(searchTerm);
     const { config, configLoading, configError } = useConfig();
-    const { poster, posterLoading, posterError } = usePosters(
-        config?.secure_base_url ?? "", 
-        config?.poster_sizes?.[3] ?? "", 
-        posterPaths ?? []
-    );
+
+    
 
 
     const handleSearch = (term: string) => {
@@ -37,14 +32,16 @@ export const Home = () => {
         if (searchTerm.trim() === "") {
             setMovieList(popularMovies ?? []);
         } else {
-            setMovieList(movies ?? [])
+            setMovieList(movies ?? []);
         }
-        setPosterPaths(movieList?.map((movie: FilmTMDb) => movie.poster_path).filter((path): path is string => path !== null && path !== undefined));
-    }, [searchTerm, popularMovies, movies, movieList]);
+    }, [searchTerm, popularMovies, movies]);
 
-    const loading = isLoading || moviesLoading || configLoading || posterLoading;
-    const error = isError || moviesError || configError || posterError;
 
+
+    const loading = isLoading || moviesLoading || configLoading;
+    const error = isError || moviesError || configError;
+
+    const baseUrl = (config?.secure_base_url ?? "") + (config?.poster_sizes?.[3] ?? "");
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error...</div>;
 
@@ -53,15 +50,14 @@ export const Home = () => {
             <SearchBar value={searchTerm} onSearch={handleSearch}/>
             <div className={styles.mainContainer}>
                 <div className={styles.moviesContainer}>
-                    {movieList?.map((movie, index) => {
+                    {movieList?.map((movie) => {
                         return(
-                            <div key={index}>
-                                <MovieCard
-                                    title={movie.title}
-                                    releaseDate={movie.release_date}
-                                    posterPath={posterLoading ? "Loading..." : poster[index] ?? null}
-                                />
-                            </div>
+                            <MovieCard
+                                key={movie.id}
+                                title={movie.title}
+                                releaseDate={movie.release_date}
+                                posterPath={movie.poster_path ? baseUrl + movie.poster_path : ""}
+                            />
                         );
                     })}
                 </div>

@@ -11,6 +11,5 @@ export const useMovieData = () => {
         queryFn: fetchPopularFilms
     });
 
-    // Fetch all movies...
     return { popularMovies, isLoading, isError };
 };
