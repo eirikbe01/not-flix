@@ -1,0 +1,37 @@
+
+.maincontainer {
+    margin: 24px;
+}
+
+
+
+.poster {
+    display: block;
+    max-height: 513px;
+    max-width: 342px;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+}
+
+
+
+.posterSkeleton {
+  position: absolute;
+  inset: 0;               /* cover the whole poster area */
+  background: hsl(0 0% 26%);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* simple pulse animation */
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50%      { opacity: 1;   }
+}
+
+.posterSkeleton, .poster {
+    z-index: 0;
+    pointer-events: none;
+}

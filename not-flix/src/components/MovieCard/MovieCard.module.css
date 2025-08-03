@@ -13,10 +13,12 @@
     justify-content: flex-start;
     position: relative;
     transition: transform 0.3s ease-in-out;
+    z-index: 1;
 }
 
 .movieCard:hover {
     transform: scale(1.02);
+    cursor: pointer;
 }
 
 .movieInfo {
@@ -56,4 +58,9 @@
 @keyframes pulse {
   0%, 100% { opacity: 0.6; }
   50%      { opacity: 1;   }
+}
+
+.posterSkeleton, .poster {
+    z-index: 0;
+    pointer-events: none;
 }

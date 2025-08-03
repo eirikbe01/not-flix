@@ -1,16 +1,25 @@
 import { useState, useEffect } from 'react';
 import styles from './MovieCard.module.css';
+import { useNavigate } from 'react-router-dom';
 
 
 
 interface MovieCardProps {
+    movieId: number;
     title: string;
     releaseDate: string;
     posterPath: string;
 }
-export const MovieCard = ({ title, releaseDate, posterPath } : MovieCardProps) => {
+export const MovieCard = ({ movieId, title, releaseDate, posterPath } : MovieCardProps) => {
 
     const [loaded, setLoaded] = useState(false);
+    const navigate = useNavigate();
+
+    const handleOnClick = () => {
+        navigate(`/movies/${movieId}`, 
+            { state: { title, releaseDate, posterPath}
+        });
+    }
 
     useEffect(() => {
         setLoaded(false);
@@ -19,7 +28,10 @@ export const MovieCard = ({ title, releaseDate, posterPath } : MovieCardProps) =
 
     return(
         <>
-            <div className={styles.movieCard}>
+            <div 
+                className={styles.movieCard}
+                onClick={handleOnClick}
+            >
                 {!loaded && <div className={styles.posterSkeleton}></div>}
                 {posterPath && (
                     <img 

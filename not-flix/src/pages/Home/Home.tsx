@@ -19,14 +19,10 @@ export const Home = () => {
     const { movies, moviesLoading, moviesError } = useMovieDataTitle(searchTerm);
     const { config, configLoading, configError } = useConfig();
 
-    
-
-
     const handleSearch = (term: string) => {
         setSearchTerm(term.trim());
-        console.log(`${term} was searched`);
-        console.log("Search term:", searchTerm);
     }
+
 
     useEffect(() => {
         if (searchTerm.trim() === "") {
@@ -54,6 +50,7 @@ export const Home = () => {
                         return(
                             <MovieCard
                                 key={movie.id}
+                                movieId={movie.id}
                                 title={movie.title}
                                 releaseDate={movie.release_date}
                                 posterPath={movie.poster_path ? baseUrl + movie.poster_path : ""}

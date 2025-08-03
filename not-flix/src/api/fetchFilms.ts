@@ -61,7 +61,7 @@ export const fetchFilmTMDbByTitle = async (movieTitle: string) : Promise<FilmTMD
     return [];
 }
 
-export const fetchFilmOMDbByTitle = async (movieTitle: string, year?: string) : Promise<FilmOMDb | undefined> => {
+export const fetchFilmOMDbByTitle = async (movieTitle: string, year?: string) : Promise<FilmOMDb> => {
     const title = encodeURIComponent(movieTitle);
     const url = year ? 
     `http://www.omdbapi.com/?apikey=${OMDbKey}&t=${title}&y=${year}` 
@@ -76,6 +76,32 @@ export const fetchFilmOMDbByTitle = async (movieTitle: string, year?: string) : 
         const result = await response.json();
 
         if (result.Response === "False") {
+            throw new Error('Movie not found');
+        }
+        console.log("Result OMDb", result);
+        return result;
+
+    } catch (error) {
+        console.error(error);
+    }
+    return {} as FilmOMDb;
+}
+
+
+export const fetchFilmOMDbById = async (id: string) : Promise<FilmOMDb> => {
+    const url = `http://www.omdbapi.com/?apikey=${OMDbKey}&i=${id}`;
+
+    try {
+        const response = await fetch(url);
+        const text = await response.text();
+        console.log("OMDb raw response:", text);
+        if (!response.ok) {
+            throw new Error(`OMDb request failed: ${response.status}`);
+        }
+
+        const result = JSON.parse(text) as FilmOMDb;
+
+        if (result.Response === "False") {
             throw new Error(result.Error || 'Movie not found');
         }
         console.log("Result OMDb", result);
@@ -84,7 +110,7 @@ export const fetchFilmOMDbByTitle = async (movieTitle: string, year?: string) : 
     } catch (error) {
         console.error(error);
     }
-    return;
+    return {} as FilmOMDb;
 }
 
 // TMDb
