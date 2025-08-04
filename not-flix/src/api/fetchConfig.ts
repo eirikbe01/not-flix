@@ -32,3 +32,21 @@ export const fetchImageConfig = async (): Promise<ImagesConfig | undefined > => 
         console.error(err);
     }
 }
+
+
+export const fetchIMDbId = async (movieId: number): Promise<string> => {
+    const url = `https://api.themoviedb.org/3/movie/${movieId}/external_ids?api_key=${TMDbKey}`;
+
+    try {
+        const response = await fetch(url)
+
+        if (!response.ok) {
+            throw new Error(`Error fetching IMDb id: ${response.status}`)
+        }
+        const data  = await response.json();
+        return data ? data.imdb_id : "";
+    } catch (err) {
+        console.error(`Error fetchiung IMDb ID for movie ${movieId}: ${err}`)
+    }
+    return "";
+}

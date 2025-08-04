@@ -14,7 +14,6 @@ export const SearchBar = (props: SearchBarProps) => {
         if (event.key === "Enter") {
             event.preventDefault();
             props.onSearch(inputValue);
-            setInputValue("");
         }
     }
 
@@ -35,7 +34,6 @@ export const SearchBar = (props: SearchBarProps) => {
                     type="button"
                     onClick={() => {
                         props.onSearch(inputValue);
-                        setInputValue("");
                     }}
                 >
                     Search
