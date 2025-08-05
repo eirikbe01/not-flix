@@ -20,6 +20,7 @@ export const MovieIdPage = () => {
         queryFn: () => fetchIMDbId(Number(id))
     })
     const [loaded, setLoaded] = useState(false);
+    const [isFavorite, setIsFavorite] = useState(false);
     const location = useLocation();
     const movieCardState = location.state as MovieCardState | undefined;
     const { title, posterPath } = movieCardState ?? {};
@@ -62,6 +63,14 @@ export const MovieIdPage = () => {
                         {movieDetails?.Ratings ? movieDetails?.Ratings.map((rating, index) => (
                             <p key={index}>👉 {rating.Value}</p>
                         )) : <p>No ratings available</p>}
+                        <input 
+                            type="checkbox" 
+                            id="favorite" 
+                            name="favorite"
+                            onChange={(e) => setIsFavorite(e.target.checked)}
+                        >
+                        </input>
+                        <label htmlFor="favorite">Mark as favorite</label>
                     </div>
                 </div>
                 <div className={styles.detailsText}>

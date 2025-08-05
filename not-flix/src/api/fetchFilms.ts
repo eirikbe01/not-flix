@@ -76,7 +76,7 @@ export const fetchFilmOMDbByTitle = async (movieTitle: string, year?: string) : 
         const result = await response.json();
 
         if (result.Response === "False") {
-            throw new Error('Movie not found');
+            throw new Error(result.Error || 'Movie not found');
         }
         console.log("Result OMDb", result);
         return result;

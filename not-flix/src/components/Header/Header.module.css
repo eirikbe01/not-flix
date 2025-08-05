@@ -5,23 +5,34 @@
     box-sizing: border-box;
     justify-content: space-between;
     align-items: center;
-    height: 60px;
-    margin: 24px 24px 0 24px;
+    height: 80px;
+    margin: 12px 24px 0 24px;
+    border-bottom: 1px solid hsl(0, 0%, 59%);
     padding: 24px;
-    background-color: hsl(0, 48%, 56%);
-    border-radius: 10px;
-    box-shadow: 0 2px 4px hsla(0, 100%, 83%, 0.9);
+    background-color: hsl(0, 0%, 20%);
 }
 
 .title {
-    font-size: 2rem;
+    font-family: "Oswald";
+    font-size: 5rem;
     font-style: normal;
     font-variant: normal;
     font-weight: 700;
+    color: hsl(0, 48%, 46%);
+    transition: transform 0.5s ease-in-out;
 }
 
 
 .title:hover {
+    cursor: pointer;
+    transform: scale(1.04);
+}
+
+.favoritesBtn {
+
+}
+
+.favoritesBtn:hover {
     cursor: pointer;
 }
 

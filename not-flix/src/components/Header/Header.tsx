@@ -8,9 +8,18 @@ export const Header = () => {
 
     return(
         <div className={styles.headerContainer}>
-            <h1 onClick={() => navigate("/")}className={styles.title}>NotFlix</h1>
-            <button>
-                Favorites
+            <h1 
+                onClick={() => navigate("/")}
+                className={styles.title}
+            >
+                NotFlix
+            </h1>
+            <button
+                type="button" 
+                onClick={() => navigate("/favorites")} 
+                className={styles.favoritesBtn}
+            >
+                Favorites❤️
             </button>
         </div>
     );

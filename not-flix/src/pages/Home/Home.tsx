@@ -4,38 +4,40 @@ import styles from './Home.module.css';
 
 import { useMovieData } from '../../hooks/useMovieData';
 import { useConfig } from '../../hooks/useConfig';
-import type { FilmTMDb } from '../../api/fetchFilms';
 import { useState, useEffect } from 'react';
 import { useMovieDataTitle } from '../../hooks/useMovieDataTitle';
+import { useSearchParams } from 'react-router-dom';
 
 export const Home = () => {
 
     // States
-    const [searchTerm, setSearchTerm] = useState("");
-    const [movieList, setMovieList] = useState<FilmTMDb[]>([]);
-
+    const [searchParams, setSearchParams] = useSearchParams();
+    const query = searchParams.get("query") ?? "";
+    const [searchTerm, setSearchTerm] = useState(query);
+    const [favoriteMovies, setFavoriteMovies] = useState<FilmTMDb[]>([]);
     // Hooks
     const { popularMovies, isLoading, isError } = useMovieData();
-    const { movies, moviesLoading, moviesError } = useMovieDataTitle(searchTerm);
+    const { movies, moviesLoading, moviesError } = useMovieDataTitle(query);
     const { config, configLoading, configError } = useConfig();
 
+;
     const handleSearch = (term: string) => {
-        setSearchTerm(term.trim());
-    }
-
-
-    useEffect(() => {
-        if (searchTerm.trim() === "") {
-            setMovieList(popularMovies ?? []);
+        if (term.trim()) {
+            setSearchParams({ query: term.trim()});
+            setSearchTerm(term.trim());
         } else {
-            setMovieList(movies ?? []);
+            setSearchParams({});
         }
-    }, [searchTerm, popularMovies, movies]);
-
+    }
 
 
     const loading = isLoading || moviesLoading || configLoading;
     const error = isError || moviesError || configError;
+    const moviesToShow = query ? movies ?? [] : popularMovies ?? [];
+
+    useEffect(() => {
+        setSearchTerm(query);
+    }, [query]);
 
     const baseUrl = (config?.secure_base_url ?? "") + (config?.poster_sizes?.[3] ?? "");
     if (loading) return <div>Loading...</div>;
@@ -46,7 +48,7 @@ export const Home = () => {
             <SearchBar value={searchTerm} onSearch={handleSearch}/>
             <div className={styles.mainContainer}>
                 <div className={styles.moviesContainer}>
-                    {movieList?.map((movie) => {
+                    {moviesToShow?.map((movie) => {
                         return(
                             <MovieCard
                                 key={movie.id}

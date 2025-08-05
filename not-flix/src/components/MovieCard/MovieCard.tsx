@@ -9,8 +9,9 @@ interface MovieCardProps {
     title: string;
     releaseDate: string;
     posterPath: string;
+    isFavorite: boolean;
 }
-export const MovieCard = ({ movieId, title, releaseDate, posterPath } : MovieCardProps) => {
+export const MovieCard = ({ movieId, title, releaseDate, posterPath, isFavorite } : MovieCardProps) => {
 
     const [loaded, setLoaded] = useState(false);
     const navigate = useNavigate();
