@@ -89,16 +89,19 @@ export const MovieIdPage = () => {
                         {movieDetails?.Ratings ? movieDetails?.Ratings.map((rating, index) => (
                             <p key={index}>👉 {rating.Value}</p>
                         )) : <p>No ratings available</p>}
-                      <input 
-                            type="checkbox" 
-                            id="favorite" 
-                            checked={favorite}
-                            onChange={(e) => {
-                                handleToggle(e);
-                            }}
-                        >
-                        </input>
-                        <label htmlFor="favorite">Mark as favorite</label>
+                        <div className={styles.favorite}>
+                            Mark as favorite
+                            <input
+                                className={styles.favoriteBtn}
+                                type="checkbox" 
+                                id="favorite" 
+                                checked={favorite}
+                                onChange={(e) => {
+                                    handleToggle(e);
+                                }}
+                            >
+                            </input>
+                        </div>
                     </div>
                 </div>
                 <div className={styles.detailsText}>
