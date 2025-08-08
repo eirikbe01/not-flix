@@ -34,11 +34,13 @@ p {
 .posterContainer {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .poster {
     max-height: 513px;
     max-width: 342px;
+    aspect-ratio: 2 / 3;
     object-fit: cover;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 12px;

@@ -3,10 +3,10 @@ import { fetchFilmTMDbById } from '../api/fetchFilms';
 
 
 export const useMovieDataId = (id: number) => {
-    const { data: movies, isLoading: moviesLoading, isError: moviesError } = useQuery({
+    const { data: movie, isLoading: moviesLoading, isError: moviesError } = useQuery({
         queryKey: ["movieDataId", id],
         queryFn: () => fetchFilmTMDbById(id)
     });
 
-    return { movies, moviesLoading, moviesError }
+    return { movie, moviesLoading, moviesError }
 }

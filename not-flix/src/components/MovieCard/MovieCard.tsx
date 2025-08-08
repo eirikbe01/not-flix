@@ -1,20 +1,23 @@
 import { useState, useEffect } from 'react';
 import styles from './MovieCard.module.css';
 import { useNavigate } from 'react-router-dom';
+import { useRef } from 'react';
 
 
 
-interface MovieCardProps {
+export interface MovieCardProps {
     movieId: number;
     title: string;
     releaseDate: string;
     posterPath: string;
-    isFavorite: boolean;
 }
 export const MovieCard = ({ movieId, title, releaseDate, posterPath } : MovieCardProps) => {
 
     const [loaded, setLoaded] = useState(false);
     const navigate = useNavigate();
+
+    const posterPathRef = useRef<string | undefined>(undefined);
+    const imgRef = useRef<HTMLImageElement | null>(null);
 
     const handleOnClick = () => {
         navigate(`/movies/${movieId}`, 
@@ -23,8 +26,14 @@ export const MovieCard = ({ movieId, title, releaseDate, posterPath } : MovieCar
     }
 
     useEffect(() => {
-        setLoaded(false);
-    }, [posterPath])
+        if (posterPathRef.current !== posterPath) {
+            setLoaded(false);
+            posterPathRef.current = posterPath;
+        }
+        if (imgRef.current?.complete || imgRef.current?.naturalWidth ? imgRef.current.naturalWidth > 0 : false) {
+            setLoaded(true);
+        }
+    }, [posterPath]);
 
 
     return(
@@ -33,7 +42,7 @@ export const MovieCard = ({ movieId, title, releaseDate, posterPath } : MovieCar
                 className={styles.movieCard}
                 onClick={handleOnClick}
             >
-                {!loaded && <div className={styles.posterSkeleton}></div>}
+                {(!loaded && posterPath) && <div className={styles.posterSkeleton}></div>}
                 {posterPath && (
                     <img 
                         key={posterPath}
@@ -43,7 +52,7 @@ export const MovieCard = ({ movieId, title, releaseDate, posterPath } : MovieCar
                         onLoad={() => setLoaded(true)}
                         onError={() => setLoaded(true)}
                         style={{ opacity: loaded ? 1 : 0}}
-                        loading="lazy"
+                        ref={imgRef}
                     />
                 )}
                 <div className={styles.movieInfo}>

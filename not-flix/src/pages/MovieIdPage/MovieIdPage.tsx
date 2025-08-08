@@ -6,6 +6,7 @@ import { fetchIMDbId } from "../../api/fetchConfig";
 import { useQuery } from '@tanstack/react-query';
 import { useFavorites } from "../../context/FavoritesContext";
 import { type ChangeEvent } from 'react';
+import { useRef } from 'react';
 
 interface MovieCardState {
     movieId: number,
@@ -28,6 +29,10 @@ export const MovieIdPage = () => {
     const movieCardState = location.state as MovieCardState | undefined;
     const { title, posterPath } = movieCardState ?? {};
 
+    // Refs
+    const posterPathRef = useRef<string | undefined>(undefined);
+    const imgRef = useRef<HTMLImageElement | null>(null);
+
     const { addFavorite, removeFavorite, isFavorite } = useFavorites();
 
     const handleToggle = (e: ChangeEvent<HTMLInputElement>) => {
@@ -45,9 +50,16 @@ export const MovieIdPage = () => {
         detailsError 
     } = useMovieDetails(imdb_id ?? "");
 
+
     useEffect(() => {
-        setLoaded(false);
-    }, [posterPath])
+        if (posterPathRef.current !== posterPath) {
+            setLoaded(false);
+            posterPathRef.current = posterPath;
+        }
+        if (imgRef.current?.complete && (imgRef.current?.naturalWidth ? imgRef.current?.naturalWidth > 0 : false)) {
+            setLoaded(true);
+        }
+    }, [posterPath]);
 
     if (detailsLoading) return <div>Loading movie details...</div>;
     if (detailsError) return <div>Error loading movie details.</div>;
@@ -56,7 +68,7 @@ export const MovieIdPage = () => {
         <div className={styles.mainContainer}>
             <div className={styles.detailsContainer}>
                 <div className={styles.posterContainer}>
-                    {!loaded && <div className={styles.posterSkeleton}></div>}
+                    {(!loaded && posterPath) && <div className={styles.posterSkeleton}></div>}
                     {posterPath && (
                         <img 
                             key={posterPath}
@@ -66,7 +78,7 @@ export const MovieIdPage = () => {
                             onLoad={() => setLoaded(true)}
                             onError={() => setLoaded(true)}
                             style={{ opacity: loaded ? 1 : 0}}
-                            loading="lazy"
+                            ref={imgRef}
                         />
                     )}
                     <div className={styles.posterText}>

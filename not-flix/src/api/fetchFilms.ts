@@ -123,7 +123,6 @@ export const fetchFilmOMDbById = async (id: string) : Promise<FilmOMDb> => {
     try {
         const response = await fetch(url);
         const text = await response.text();
-        console.log("OMDb raw response:", text);
         if (!response.ok) {
             throw new Error(`OMDb request failed: ${response.status}`);
         }
@@ -133,7 +132,6 @@ export const fetchFilmOMDbById = async (id: string) : Promise<FilmOMDb> => {
         if (result.Response === "False") {
             throw new Error(result.Error || 'Movie not found');
         }
-        console.log("Result OMDb", result);
         return result;
 
     } catch (error) {
