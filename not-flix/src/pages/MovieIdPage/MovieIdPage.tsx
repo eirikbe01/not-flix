@@ -4,6 +4,8 @@ import styles from './MovieIdPage.module.css';
 import { useState, useEffect } from 'react';
 import { fetchIMDbId } from "../../api/fetchConfig";
 import { useQuery } from '@tanstack/react-query';
+import { useFavorites } from "../../context/FavoritesContext";
+import { type ChangeEvent } from 'react';
 
 interface MovieCardState {
     movieId: number,
@@ -18,12 +20,24 @@ export const MovieIdPage = () => {
     const { data: imdb_id } = useQuery({
         queryKey: ['imdb_id', id],
         queryFn: () => fetchIMDbId(Number(id))
-    })
+    });
+
+
     const [loaded, setLoaded] = useState(false);
-    const [isFavorite, setIsFavorite] = useState(false);
     const location = useLocation();
     const movieCardState = location.state as MovieCardState | undefined;
     const { title, posterPath } = movieCardState ?? {};
+
+    const { addFavorite, removeFavorite, isFavorite } = useFavorites();
+
+    const handleToggle = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.checked) {
+            addFavorite(Number(id))
+        } else {
+            removeFavorite(Number(id))
+        }
+    };
+    const favorite = isFavorite(Number(id));
 
     const { 
         movieDetails, 
@@ -63,11 +77,13 @@ export const MovieIdPage = () => {
                         {movieDetails?.Ratings ? movieDetails?.Ratings.map((rating, index) => (
                             <p key={index}>👉 {rating.Value}</p>
                         )) : <p>No ratings available</p>}
-                        <input 
+                      <input 
                             type="checkbox" 
                             id="favorite" 
-                            name="favorite"
-                            onChange={(e) => setIsFavorite(e.target.checked)}
+                            checked={favorite}
+                            onChange={(e) => {
+                                handleToggle(e);
+                            }}
                         >
                         </input>
                         <label htmlFor="favorite">Mark as favorite</label>

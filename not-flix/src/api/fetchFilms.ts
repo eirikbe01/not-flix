@@ -39,6 +39,17 @@ export interface FilmTMDb {
     genre_ids: number[];
 }
 
+
+export interface FilmTMDbById {
+    id: number,
+    imdb_id: string,
+    original_title: string,
+    overview: string,
+    poster_path: string,
+    release_date: string,
+    runtime: number
+}
+
 export interface TmdbResponse {
     results: FilmTMDb[];
 }
@@ -59,6 +70,24 @@ export const fetchFilmTMDbByTitle = async (movieTitle: string) : Promise<FilmTMD
         console.error(err);
     }
     return [];
+}
+
+
+export const fetchFilmTMDbById = async (id: number) : Promise<FilmTMDbById> => {
+    const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${TMDbKey}`
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`TMDb request failed: ${response.status}`)
+        }
+        const data = await response.json() as FilmTMDbById
+
+        return data;
+    } catch (err) {
+        console.error(err);
+    }
+    return {} as FilmTMDbById;
 }
 
 export const fetchFilmOMDbByTitle = async (movieTitle: string, year?: string) : Promise<FilmOMDb> => {

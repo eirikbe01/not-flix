@@ -11,14 +11,14 @@ interface MovieCardProps {
     posterPath: string;
     isFavorite: boolean;
 }
-export const MovieCard = ({ movieId, title, releaseDate, posterPath, isFavorite } : MovieCardProps) => {
+export const MovieCard = ({ movieId, title, releaseDate, posterPath } : MovieCardProps) => {
 
     const [loaded, setLoaded] = useState(false);
     const navigate = useNavigate();
 
     const handleOnClick = () => {
         navigate(`/movies/${movieId}`, 
-            { state: { title, releaseDate, posterPath}
+            { state: {movieId, title, releaseDate, posterPath}
         });
     }
 

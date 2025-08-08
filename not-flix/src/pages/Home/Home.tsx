@@ -14,7 +14,6 @@ export const Home = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const query = searchParams.get("query") ?? "";
     const [searchTerm, setSearchTerm] = useState(query);
-    const [favoriteMovies, setFavoriteMovies] = useState<FilmTMDb[]>([]);
     // Hooks
     const { popularMovies, isLoading, isError } = useMovieData();
     const { movies, moviesLoading, moviesError } = useMovieDataTitle(query);

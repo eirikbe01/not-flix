@@ -4,7 +4,7 @@ import { HomeLayout } from '../pages/HomeLayout';
 import { Home } from '../pages/Home/Home';
 import { MovieIdPage } from '../pages/MovieIdPage/MovieIdPage';
 import { NotFound } from '../pages/NotFound/NotFound';
-import {Favorites } from '../pages/Favorites';
+import {FavoritesPage} from '../pages/FavoritesPage/FavoritesPage';
 
 
 export const Router = () => {
@@ -15,7 +15,7 @@ export const Router = () => {
                     <Route index element={<Home />} />
                     <Route path="/search" element={<Home />} />
                     <Route path="/movies/:id" element={<MovieIdPage />} />
-                    <Route path="/favorites" element={<Favorites />} />
+                    <Route path="/favorites" element={<FavoritesPage />} />
                     <Route path="*" element={<NotFound />} />
                 </Route>
             </Routes>
