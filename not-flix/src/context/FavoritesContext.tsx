@@ -5,6 +5,7 @@ export type FavoritesContextType = {
     addFavorite: (id: number) => void,
     removeFavorite: (id: number) => void,
     isFavorite: (id: number) => boolean;
+    clearFavorites: () => void;
 }
 
 export const FavoritesContext = createContext<FavoritesContextType | undefined>(undefined);

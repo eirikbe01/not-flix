@@ -33,7 +33,7 @@ export const MovieIdPage = () => {
     const posterPathRef = useRef<string | undefined>(undefined);
     const imgRef = useRef<HTMLImageElement | null>(null);
 
-    const { addFavorite, removeFavorite, isFavorite } = useFavorites();
+    const { addFavorite, removeFavorite, isFavorite, clearFavorites } = useFavorites();
 
     const handleToggle = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.checked) {
