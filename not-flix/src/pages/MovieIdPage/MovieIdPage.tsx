@@ -7,6 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useFavorites } from "../../context/FavoritesContext";
 import { type ChangeEvent } from 'react';
 import { useRef } from 'react';
+import { MoonLoader } from 'react-spinners';
 
 interface MovieCardState {
     movieId: number,
@@ -33,7 +34,7 @@ export const MovieIdPage = () => {
     const posterPathRef = useRef<string | undefined>(undefined);
     const imgRef = useRef<HTMLImageElement | null>(null);
 
-    const { addFavorite, removeFavorite, isFavorite, clearFavorites } = useFavorites();
+    const { addFavorite, removeFavorite, isFavorite } = useFavorites();
 
     const handleToggle = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.checked) {
@@ -61,7 +62,14 @@ export const MovieIdPage = () => {
         }
     }, [posterPath]);
 
-    if (detailsLoading) return <div>Loading movie details...</div>;
+    if (detailsLoading) {
+        return(
+            <div className={styles.spinner}>
+                <MoonLoader color="#ae3d3d"/>
+            </div>
+        );
+    }
+
     if (detailsError) return <div>Error loading movie details.</div>;
 
     return(

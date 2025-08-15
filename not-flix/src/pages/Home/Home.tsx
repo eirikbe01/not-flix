@@ -1,6 +1,7 @@
 import { MovieCard } from '../../components/MovieCard/MovieCard';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import styles from './Home.module.css';
+import { MoonLoader } from 'react-spinners';
 
 import { useMovieData } from '../../hooks/useMovieData';
 import { useConfig } from '../../hooks/useConfig';
@@ -41,7 +42,13 @@ export const Home = () => {
     }, [query]);
 
     const baseUrl = (config?.secure_base_url ?? "") + (config?.poster_sizes?.[3] ?? "");
-    if (loading) return <div>Loading...</div>;
+    if (loading) {
+        return (
+        <div className={styles.spinner}>
+            <MoonLoader />
+        </div>
+        );
+    }
     if (error) return <div>Error...</div>;
 
     return(

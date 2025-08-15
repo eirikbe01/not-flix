@@ -22,14 +22,14 @@
     transition: transform 0.5s ease-in-out;
 }
 
+.favoritesIcon {
+    max-width: 40px;
+    max-height: 40px;
+}
 
 .title:hover {
     cursor: pointer;
     transform: scale(1.04);
-}
-
-.favoritesBtn {
-
 }
 
 .favoritesBtn:hover {

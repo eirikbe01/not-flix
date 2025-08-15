@@ -28,17 +28,26 @@
 }
 
 .searchBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 8px 8px;
     border-radius: 8px;
     font-size: 1.2rem;
     background-color: hsl(0, 48%, 46%);
     box-shadow: 2px 2px 4px hsl(0, 0%, 31%);
     margin: 12px;
-    width: 120px;
-    transition: background-color 0.3s ease-in-out;
+    width: 80px;
+    transition: background-color 0.5s ease-in-out;
 }
 
 .searchBtn:hover {
     cursor: pointer;
     background-color: hsl(0, 48%, 56%);
+}
+
+
+.searchIcon {
+    max-width: 40px;
+    max-height: 40px;
 }

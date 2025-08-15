@@ -11,3 +11,10 @@
     gap: 2rem;
     justify-content: center;
 }
+
+.spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 24px;
+}

@@ -4,6 +4,7 @@ import { MovieCard } from '../../components/MovieCard/MovieCard';
 import { useConfig } from '../../hooks/useConfig';
 import { useQueries } from "@tanstack/react-query";
 import { fetchFilmTMDbById } from "../../api/fetchFilms";
+import { MoonLoader } from 'react-spinners';
 
 export const FavoritesPage = () => {
 
@@ -27,7 +28,11 @@ export const FavoritesPage = () => {
         return <div className={styles.noFavorites}>No favorites added yet.</div>;
     }
     if (isAnyLoading) {
-        return <div className={styles.loading}>Loading favorites…</div>;
+        return(
+            <div className={styles.spinner}>
+                <MoonLoader color="#ae3d3d"/>
+            </div>
+        );
     }
     if (isAnyError) {
         return <div className={styles.error}>Some favorites failed to load.</div>;

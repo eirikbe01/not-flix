@@ -1,5 +1,6 @@
 import { useState, type ChangeEvent } from 'react';
 import styles from './SearchBar.module.css';
+import searchIcon from '../../assets/searchIcon.svg';
 
 interface SearchBarProps {
     value: string;
@@ -35,8 +36,9 @@ export const SearchBar = (props: SearchBarProps) => {
                     onClick={() => {
                         props.onSearch(inputValue);
                     }}
+                    aria-label="Search"
                 >
-                    Search
+                    <img className={styles.searchIcon} src={searchIcon}></img>
                 </button>
             </div>
         </div>

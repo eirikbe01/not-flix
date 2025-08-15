@@ -1,6 +1,7 @@
 
 import styles from './Header.module.css';
 import { useNavigate } from 'react-router-dom';
+import favoritesIcon from '../../assets/favoritesIcon.svg';
 
 export const Header = () => {
 
@@ -16,10 +17,11 @@ export const Header = () => {
             </h1>
             <button
                 type="button" 
-                onClick={() => navigate("/favorites")} 
+                onClick={() => navigate("/favorites")}
                 className={styles.favoritesBtn}
+                aria-label="Favorites"
             >
-                Favorites❤️
+                <img className={styles.favoritesIcon} src={favoritesIcon}></img>
             </button>
         </div>
     );
