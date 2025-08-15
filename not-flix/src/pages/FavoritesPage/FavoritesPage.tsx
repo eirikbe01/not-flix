@@ -38,6 +38,9 @@ export const FavoritesPage = () => {
 
     return(
         <div className={styles.mainContainer}>
+            <div className={styles.headingContainer}>
+                <h1 className={styles.heading}>Your Favorites</h1>
+            </div>
             <div className={styles.moviesContainer}>
                 {moviesToShow?.map((movie) => {
                     return(
@@ -47,6 +50,7 @@ export const FavoritesPage = () => {
                             title={movie.original_title}
                             releaseDate={movie.release_date}
                             posterPath={movie.poster_path ? baseUrl + movie.poster_path : ""}
+                            genres={movie.genres.map((genre) => genre.name)}
                         />
                     );
                 })}

@@ -46,7 +46,7 @@ export const fetchIMDbId = async (movieId: number): Promise<string> => {
         const data  = await response.json();
         return data ? data.imdb_id : "";
     } catch (err) {
-        console.error(`Error fetchiung IMDb ID for movie ${movieId}: ${err}`)
+        console.error(`Error fetching IMDb ID for movie ${movieId}: ${err}`)
     }
     return "";
 }

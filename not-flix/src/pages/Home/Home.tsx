@@ -7,6 +7,7 @@ import { useConfig } from '../../hooks/useConfig';
 import { useState, useEffect } from 'react';
 import { useMovieDataTitle } from '../../hooks/useMovieDataTitle';
 import { useSearchParams } from 'react-router-dom';
+import { useGenreMap } from '../../hooks/useGenreMap';
 
 export const Home = () => {
 
@@ -18,6 +19,7 @@ export const Home = () => {
     const { popularMovies, isLoading, isError } = useMovieData();
     const { movies, moviesLoading, moviesError } = useMovieDataTitle(query);
     const { config, configLoading, configError } = useConfig();
+    const { genres, genresLoading, genresError } = useGenreMap();
 
 ;
     const handleSearch = (term: string) => {
@@ -30,8 +32,8 @@ export const Home = () => {
     }
 
 
-    const loading = isLoading || moviesLoading || configLoading;
-    const error = isError || moviesError || configError;
+    const loading = isLoading || moviesLoading || configLoading || genresLoading;
+    const error = isError || moviesError || configError || genresError;
     const moviesToShow = query ? movies ?? [] : popularMovies ?? [];
 
     useEffect(() => {
@@ -55,6 +57,7 @@ export const Home = () => {
                                 title={movie.title}
                                 releaseDate={movie.release_date}
                                 posterPath={movie.poster_path ? baseUrl + movie.poster_path : ""}
+                                genres={genres ? movie.genre_ids.map(id => genres[id]) : []}
                             />
                         );
                     })}

@@ -47,7 +47,8 @@ export interface FilmTMDbById {
     overview: string,
     poster_path: string,
     release_date: string,
-    runtime: number
+    runtime: number,
+    genres: {id: number, name: string}[]
 }
 
 export interface TmdbResponse {
@@ -64,7 +65,6 @@ export const fetchFilmTMDbByTitle = async (movieTitle: string) : Promise<FilmTMD
             throw new Error(`TMDB request failed: ${response.status}`);
         }
         const data = await response.json() as TmdbResponse;
-
         return data.results.length ? data.results : [];
     } catch (err) {
         console.error(err);

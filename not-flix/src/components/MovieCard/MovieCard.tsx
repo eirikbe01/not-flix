@@ -10,8 +10,9 @@ export interface MovieCardProps {
     title: string;
     releaseDate: string;
     posterPath: string;
+    genres: string[];
 }
-export const MovieCard = ({ movieId, title, releaseDate, posterPath } : MovieCardProps) => {
+export const MovieCard = ({ movieId, title, releaseDate, posterPath, genres } : MovieCardProps) => {
 
     const [loaded, setLoaded] = useState(false);
     const navigate = useNavigate();
@@ -21,7 +22,7 @@ export const MovieCard = ({ movieId, title, releaseDate, posterPath } : MovieCar
 
     const handleOnClick = () => {
         navigate(`/movies/${movieId}`, 
-            { state: {movieId, title, releaseDate, posterPath}
+            { state: {movieId, title, releaseDate, posterPath, genres}
         });
     }
 
@@ -34,6 +35,8 @@ export const MovieCard = ({ movieId, title, releaseDate, posterPath } : MovieCar
             setLoaded(true);
         }
     }, [posterPath]);
+
+    console.log(genres);
 
 
     return(
@@ -57,7 +60,8 @@ export const MovieCard = ({ movieId, title, releaseDate, posterPath } : MovieCar
                 )}
                 <div className={styles.movieInfo}>
                     <h2 className={styles.title}>{title}</h2>
-                    <p className={styles.releaseDate}>{releaseDate}</p>
+                    <h4 className={styles.releaseDate}>{releaseDate}</h4>
+                    <h4 className={styles.genre}>{genres.join(', ')}</h4>
                 </div>
             </div>
         </>

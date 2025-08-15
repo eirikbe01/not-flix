@@ -1,0 +1,24 @@
+
+
+.mainContainer {
+    margin: 24px;
+}
+
+.moviesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+
+
+.headingContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.heading {
+    font-size: 2rem;
+    margin: 32px 0;
+    border-bottom: 1px solid rgb(168, 168, 168);
+}
