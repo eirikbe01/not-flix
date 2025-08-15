@@ -144,7 +144,7 @@ export const fetchFilmOMDbById = async (id: string) : Promise<FilmOMDb> => {
 export const fetchPopularFilms = async (): Promise<FilmTMDb[]> => {
     // Get three pages worth of content
     const allPopularFilms: FilmTMDb[] = [];
-    for (let page = 1; page <= 1; page++) {
+    for (let page = 1; page <= 5; page++) {
         const url = `https://api.themoviedb.org/3/movie/popular?api_key=${TMDbKey}&language=en-US&page=${page}`;
         try {
             const response = await fetch(url);
